@@ -22,12 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.imageio.ImageIO;
@@ -64,8 +61,7 @@ public class LonginController {
     public String welcome() {
         return "redirect:admin";
     }
-
-    @GetMapping(value = {"admin","admin/index"})
+    @RequestMapping(value = {"admin","admin/index"})
     public String adminIndex(RedirectAttributes attributes, ModelMap map) {
         Subject s = SecurityUtils.getSubject();
         attributes.addFlashAttribute(LOGIN_TYPE, LoginTypeEnum.ADMIN);
@@ -75,7 +71,7 @@ public class LonginController {
         return "redirect:toLogin";
     }
 
-    @GetMapping(value = "toLogin")
+    @RequestMapping(value = "toLogin")
     public String adminToLogin(HttpSession session, @ModelAttribute(LOGIN_TYPE) String loginType) {
         if(StringUtils.isBlank(loginType)) {
             LoginTypeEnum attribute = (LoginTypeEnum) session.getAttribute(LOGIN_TYPE);
@@ -91,7 +87,7 @@ public class LonginController {
         }
     }
 
-    @GetMapping(value = "index")
+    @RequestMapping(value = "index")
     public String index(HttpSession session, @ModelAttribute(LOGIN_TYPE) String loginType) {
         if(StringUtils.isBlank(loginType)) {
             LoginTypeEnum attribute = (LoginTypeEnum) session.getAttribute(LOGIN_TYPE);
@@ -124,7 +120,7 @@ public class LonginController {
         ImageIO.write(bufferedImage, "JPEG", response.getOutputStream());
     }
 
-    @PostMapping("admin/login")
+    @RequestMapping("admin/login")
     @SysLog("用户登录")
     @ResponseBody
     public ResponseEntity adminLogin(HttpServletRequest request) {
@@ -176,7 +172,7 @@ public class LonginController {
         }
     }
 
-    @GetMapping("admin/main")
+    @RequestMapping("admin/main")
     public String main(ModelMap map){
         return "admin/main";
     }
@@ -185,7 +181,7 @@ public class LonginController {
      * 获得用户所拥有的菜单列表
      * @return
      */
-    @GetMapping("/admin/user/getUserMenu")
+    @RequestMapping("/admin/user/getUserMenu")
     @ResponseBody
     public List<ShowMenuVo> getUserMenu(){
         String userId = MySysUser.id();
@@ -193,7 +189,7 @@ public class LonginController {
         return list;
     }
 
-    @GetMapping("systemLogout")
+    @RequestMapping("systemLogout")
     @SysLog("退出系统")
     public String logOut(){
         SecurityUtils.getSubject().logout();
