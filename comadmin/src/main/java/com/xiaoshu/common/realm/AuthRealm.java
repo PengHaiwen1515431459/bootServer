@@ -116,12 +116,12 @@ public class AuthRealm extends AuthorizingRealm {
 
         private static final long serialVersionUID = -1373760761780840081L;
 
-        public String id;
+        public Integer id;
         public String loginName;
         public String nickName;
         public String icon;
 
-        public ShiroUser(String id, String loginName, String nickName,String icon) {
+        public ShiroUser(Integer id, String loginName, String nickName,String icon) {
             this.id = id;
             this.loginName = loginName;
             this.nickName = nickName;
@@ -137,7 +137,7 @@ public class AuthRealm extends AuthorizingRealm {
         public String getIcon() {
             return icon;
         }
-        public String getId() {
+        public Integer getId() {
             return id;
         }
 
@@ -176,7 +176,9 @@ public class AuthRealm extends AuthorizingRealm {
             ShiroUser other = (ShiroUser) obj;
             if (loginName == null) {
                 return other.loginName == null;
-            } else return loginName.equals(other.loginName);
+            } else{
+                return loginName.equals(other.loginName);
+            }
         }
     }
 }

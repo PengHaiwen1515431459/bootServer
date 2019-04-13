@@ -18,7 +18,7 @@ import java.util.Map;
 public class MenuServiceImpl extends ServiceImpl<MenuMapper,Menu> implements MenuService {
 
     @Override
-    public List<ShowMenuVo> getShowMenuByUser(String id) {
+    public List<ShowMenuVo> getShowMenuByUser(Integer id) {
         Map<String,Object> map = new HashMap();
         map.put("userId",id);
         map.put("parentId",null);
@@ -36,7 +36,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper,Menu> implements Men
     }
 
     @Override
-    public Menu selectById(String parentId) {
+    public Menu selectById(Integer parentId) {
         return baseMapper.selectById(parentId);
     }
 
@@ -64,7 +64,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper,Menu> implements Men
     }
 
     @Override
-    public Integer seleclMenuMaxSortByPArentId(String parentId) {
+    public Integer seleclMenuMaxSortByPArentId(Integer parentId) {
         QueryWrapper<Menu> wrapper = new QueryWrapper<>();
         Object o = getObj(wrapper.select("max(sort) as sort").eq("parent_id",parentId));
         return  o == null ? 1 : ((Menu)o).getSort() + 1;

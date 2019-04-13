@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class BaseEntity<T extends Model> extends Model<T> {
 
     @TableId
-    protected String id;
+    protected Integer id;
 
     public BaseEntity() {
     }
@@ -19,15 +19,15 @@ public class BaseEntity<T extends Model> extends Model<T> {
         return this.id;
     }
 
-    public BaseEntity(String id) {
+    public BaseEntity(Integer id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -9,11 +9,11 @@ import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper extends BaseMapper<Role> {
 
-    void saveRoleMenus(@Param("roleId") String roleId,  @Param("menus") Set<Menu> menuSet);
+    void saveRoleMenus(@Param("roleId") Integer roleId,  @Param("menus") Set<Menu> menuSet);
 
-    Role selectRoleById(@Param("roleId") String roleId);
+    Role selectRoleById(@Param("roleId") Integer roleId);
 
-    void dropRoleMenus(@Param("roleId") String roleId);
+    void dropRoleMenus(@Param("roleId") Integer roleId);
 
-    void dropRoleUsers(@Param("roleId") String roleId);
+    void dropRoleUsers(@Param("roleId") Integer roleId);
 }

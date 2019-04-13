@@ -33,7 +33,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper,Role> implements Rol
     }
 
     @Override
-    public Role getRoleById(String id) {
+    public Role getRoleById(Integer id) {
         return baseMapper.selectRoleById(id);
     }
 

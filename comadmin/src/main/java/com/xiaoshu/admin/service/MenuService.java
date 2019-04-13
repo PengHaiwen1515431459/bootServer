@@ -9,13 +9,13 @@ import java.util.Map;
 
 public interface MenuService extends IService<Menu> {
 
-    List<ShowMenuVo> getShowMenuByUser(String userId);
+    List<ShowMenuVo> getShowMenuByUser(Integer userId);
 
     List<Menu> selectAllMenus(Map<String,Object> map);
 
     List<Menu> selectAllMenuList(Map<String,Object> map);
 
-    Menu selectById(String parentId);
+    Menu selectById(Integer parentId);
 
     Integer getCountByName(String name);
 
@@ -23,7 +23,7 @@ public interface MenuService extends IService<Menu> {
 
     Integer selectFirstLevelMenuMaxSort();
 
-    Integer seleclMenuMaxSortByPArentId(String parentId);
+    Integer seleclMenuMaxSortByPArentId(Integer parentId);
 
     void saveOrUpdateMenu(Menu menu);
 }

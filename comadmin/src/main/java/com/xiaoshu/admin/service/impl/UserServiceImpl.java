@@ -26,7 +26,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User findUserById(String id) {
+    public User findUserById(Integer id) {
         Map<String,Object> map = new HashMap();
         map.put("id", id);
         return baseMapper.selectUserByMap(map);
@@ -42,7 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveUserRoles(String id, Set<Role> roleSet) {
+    public void saveUserRoles(Integer id, Set<Role> roleSet) {
         baseMapper.saveUserRoles(id,roleSet);
     }
 
@@ -76,7 +76,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void dropUserRolesByUserId(String id) {
+    public void dropUserRolesByUserId(Integer id) {
         baseMapper.dropUserRolesByUserId(id);
     }
 

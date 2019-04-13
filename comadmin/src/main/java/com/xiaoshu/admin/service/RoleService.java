@@ -11,7 +11,7 @@ public interface RoleService extends IService<Role> {
 
     Role saveRole(Role role);
 
-    Role getRoleById(String id);
+    Role getRoleById(Integer id);
 
     void updateRole(Role role);
 

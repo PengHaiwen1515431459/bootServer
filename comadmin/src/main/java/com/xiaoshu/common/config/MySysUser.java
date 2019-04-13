@@ -12,7 +12,7 @@ public class MySysUser {
         return ShiroUser().getIcon();
     }
 
-    public static String id() {
+    public static Integer id() {
         return ShiroUser().getId();
     }
 

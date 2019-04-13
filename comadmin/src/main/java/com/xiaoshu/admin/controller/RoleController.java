@@ -68,14 +68,14 @@ public class RoleController {
 
     private List<Role> setUserToRole(List<Role> roles){
         roles.forEach(r -> {
-            if(StringUtils.isNotBlank(r.getCreateId())){
+            if(r.getCreateId()!=null){
                 User u = userService.findUserById(r.getCreateId());
                 if(StringUtils.isBlank(u.getNickName())){
                     u.setNickName(u.getLoginName());
                 }
                 r.setCreateUser(u);
             }
-            if(StringUtils.isNotBlank(r.getUpdateId())){
+            if(r.getUpdateId()!=null){
                 User u  = userService.findUserById(r.getUpdateId());
                 if(StringUtils.isBlank(u.getNickName())){
                     u.setNickName(u.getLoginName());
@@ -113,11 +113,11 @@ public class RoleController {
     }
 
     @GetMapping("edit")
-    public String edit(String id,ModelMap modelMap){
+    public String edit(Integer id,ModelMap modelMap){
         Role role = roleService.getRoleById(id);
         String menuIds = null;
         if(role != null) {
-            menuIds  = role.getMenuSet().stream().map(menu -> menu.getId()).collect(Collectors.joining(","));
+            menuIds  = role.getMenuSet().stream().map(menu -> menu.getId().toString()).collect(Collectors.joining(","));
         }
         Map<String,Object> map = new HashMap();
         map.put("parentId",null);
@@ -134,7 +134,7 @@ public class RoleController {
     @ResponseBody
     @SysLog("保存编辑角色数据")
     public ResponseEntity edit(@RequestBody Role role){
-        if(StringUtils.isBlank(role.getId())){
+        if(role.getId()==null){
             return ResponseEntity.failure("角色ID不能为空");
         }
         if(StringUtils.isBlank(role.getName())){
@@ -154,8 +154,8 @@ public class RoleController {
     @PostMapping("delete")
     @ResponseBody
     @SysLog("删除角色数据")
-    public ResponseEntity delete(@RequestParam(value = "id",required = false)String id){
-        if(StringUtils.isBlank(id)){
+    public ResponseEntity delete(@RequestParam(value = "id",required = false)Integer id){
+        if(id==null){
             return ResponseEntity.failure("角色ID不能为空");
         }
         Role role = roleService.getRoleById(id);

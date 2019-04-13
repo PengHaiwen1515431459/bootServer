@@ -10,11 +10,11 @@ public interface UserService extends IService<User> {
 
     User findUserByLoginName(String name);
 
-    User findUserById(String id);
+    User findUserById(Integer id);
 
     int userCount(String loginName);
 
-    void saveUserRoles(String id, Set<Role> roleLists);
+    void saveUserRoles(Integer id, Set<Role> roleLists);
 
     void saveUser(User user);
 

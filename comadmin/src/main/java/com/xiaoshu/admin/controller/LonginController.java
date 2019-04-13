@@ -184,7 +184,7 @@ public class LonginController {
     @RequestMapping("/admin/user/getUserMenu")
     @ResponseBody
     public List<ShowMenuVo> getUserMenu(){
-        String userId = MySysUser.id();
+        Integer userId = MySysUser.id();
         List<ShowMenuVo> list = menuService.getShowMenuByUser(userId);
         return list;
     }

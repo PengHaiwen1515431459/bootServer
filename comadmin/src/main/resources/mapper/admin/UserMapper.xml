@@ -85,7 +85,7 @@
         </foreach>
     </select>
 
-    <delete id="dropUserRolesByUserId" parameterType="java.lang.String">
+    <delete id="dropUserRolesByUserId" parameterType="java.lang.Integer">
         delete from sys_user_role where user_id = #{userId}
     </delete>
 

@@ -40,8 +40,8 @@ public class MenuController {
         map.put("del_flag",false);
         List<Menu> menus = menuService.selectAllMenuList(map);
         menus.forEach( menu -> {
-            if(StringUtils.isBlank(menu.getParentId())) {
-                menu.setParentId("-1");
+            if(menu.getParentId()==null) {
+                menu.setParentId(-1);
             }
         });
         menus.sort(Comparator.comparing(Menu::getSort));
@@ -49,7 +49,7 @@ public class MenuController {
     }
 
     @GetMapping("add")
-    public String add(@RequestParam(value = "parentId",required = false) String parentId, ModelMap modelMap){
+    public String add(@RequestParam(value = "parentId",required = false) Integer parentId, ModelMap modelMap){
         if(parentId != null){
             Menu menu = menuService.selectById(parentId);
             modelMap.put("parentMenu",menu);
@@ -92,7 +92,7 @@ public class MenuController {
     }
 
     @GetMapping("edit")
-    public String edit(String id,ModelMap modelMap){
+    public String edit(Integer id,ModelMap modelMap){
         Menu menu = menuService.selectById(id);
         modelMap.addAttribute("menu",menu);
         return "admin/menu/edit";
@@ -103,7 +103,7 @@ public class MenuController {
     @ResponseBody
     @SysLog("保存编辑菜单数据")
     public ResponseEntity edit(Menu menu){
-        if(StringUtils.isBlank(menu.getId())){
+        if(menu.getId()==null){
             return ResponseEntity.failure("菜单ID不能为空");
         }
         if (StringUtils.isBlank(menu.getName())) {
@@ -133,8 +133,8 @@ public class MenuController {
     @PostMapping("delete")
     @ResponseBody
     @SysLog("删除菜单")
-    public ResponseEntity delete(@RequestParam(value = "id",required = false)String id){
-        if(StringUtils.isBlank(id)){
+    public ResponseEntity delete(@RequestParam(value = "id",required = false)Integer id){
+        if(id==null){
             return ResponseEntity.failure("菜单ID不能为空");
         }
         Menu menu = menuService.selectById(id);

@@ -107,7 +107,7 @@ public class UserController {
         }
         user.setPassword(Constants.DEFAULT_PASSWORD);
         userService.saveUser(user);
-        if(StringUtils.isBlank(user.getId())){
+        if(user.getId()==null){
             return ResponseEntity.failure("保存用户信息出错");
         }
         //保存用户角色关系
@@ -116,11 +116,11 @@ public class UserController {
     }
 
     @GetMapping("edit")
-    public String edit(String id,ModelMap modelMap){
+    public String edit(Integer id,ModelMap modelMap){
         User user = userService.findUserById(id);
         String roleIds = "";
         if(user != null) {
-            roleIds = user.getRoleLists().stream().map(role -> role.getId()).collect(Collectors.joining(","));
+            roleIds = user.getRoleLists().stream().map(role -> role.getId().toString()).collect(Collectors.joining(","));
         }
         List<Role> roleList = roleService.selectAll();
         modelMap.put("localuser",user);
@@ -134,7 +134,7 @@ public class UserController {
     @ResponseBody
     @SysLog("保存系统用户编辑数据")
     public ResponseEntity edit(@RequestBody  User user){
-        if(StringUtils.isBlank(user.getId())){
+        if(user.getId()==null){
             return ResponseEntity.failure("用户ID不能为空");
         }
         if(StringUtils.isBlank(user.getLoginName())){
@@ -168,7 +168,7 @@ public class UserController {
         user.setIcon(oldUser.getIcon());
         userService.updateUser(user);
 
-        if(StringUtils.isBlank(user.getId())){
+        if(user.getId()==null){
             return ResponseEntity.failure("保存用户信息出错");
         }
         userService.saveUserRoles(user.getId(),user.getRoleLists());
@@ -229,7 +229,7 @@ public class UserController {
 
     @GetMapping("userinfo")
     public String toEditMyInfo(ModelMap modelMap){
-        String userId = MySysUser.id();
+        Integer userId = MySysUser.id();
         User user = userService.findUserById(userId);
         modelMap.put("userinfo",user);
         modelMap.put("userRole",user.getRoleLists());
@@ -240,7 +240,7 @@ public class UserController {
     @PostMapping("saveUserinfo")
     @ResponseBody
     public ResponseEntity saveUserInfo(User user){
-        if(StringUtils.isBlank(user.getId())){
+        if(user.getId()==null){
             return ResponseEntity.failure("用户ID不能为空");
         }
         if(StringUtils.isBlank(user.getLoginName())){

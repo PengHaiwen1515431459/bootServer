@@ -62,7 +62,7 @@ public class Menu extends TreeEntity<Menu> {
         this.icon = icon;
     }
 
-    public String getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 

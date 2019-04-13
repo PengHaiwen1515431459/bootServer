@@ -17,7 +17,7 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
      *  创建者
      */
     @TableField(value = "create_by", fill = FieldFill.INSERT)
-    protected String createId;
+    protected Integer createId;
 
     /**
      * 创建日期
@@ -29,7 +29,7 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
      * 更新者
      */
     @TableField(value = "update_by", fill = FieldFill.INSERT_UPDATE)
-    protected String updateId;
+    protected Integer updateId;
 
     /**
      * 更新日期
@@ -64,11 +64,11 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
 
 
 
-    public String getCreateId() {
+    public Integer getCreateId() {
         return createId;
     }
 
-    public void setCreateId(String createId) {
+    public void setCreateId(Integer createId) {
         this.createId = createId;
     }
 
@@ -82,11 +82,11 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
         this.createDate = createDate;
     }
 
-    public String getUpdateId() {
+    public Integer getUpdateId() {
         return updateId;
     }
 
-    public void setUpdateId(String updateId) {
+    public void setUpdateId(Integer updateId) {
         this.updateId = updateId;
     }
 
@@ -95,7 +95,7 @@ public abstract class DataEntity<T extends Model> extends BaseEntity<T> {
         this.delFlag = false;
     }
 
-    public DataEntity(String id) {
+    public DataEntity(Integer id) {
         super(id);
     }
 

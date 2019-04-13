@@ -14,7 +14,7 @@ public abstract class TreeEntity<T extends Model> extends DataEntity<T> {
      * varchar(36) NULL父id
      */
     @TableField(value = "parent_id")
-    protected String parentId;
+    protected Integer parentId;
 
     /**
      * 节点层次（第一层，第二层，第三层....）
@@ -43,15 +43,15 @@ public abstract class TreeEntity<T extends Model> extends DataEntity<T> {
         this.sort = 30;
     }
 
-    public TreeEntity(String id) {
+    public TreeEntity(Integer id) {
         super(id);
     }
 
-    public String getParentId() {
-        return parentId;
-    }
+//    public Integer getParentId() {
+//        return parentId;
+//    }
 
-    public void setParentId(String parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 
