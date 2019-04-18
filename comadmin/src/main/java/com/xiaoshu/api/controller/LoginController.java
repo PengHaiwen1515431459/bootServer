@@ -23,6 +23,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam(value = "username", defaultValue = "") String username,
                          @RequestParam(value = "password", defaultValue = "") String password) {
+        logger.info("app用户登录");
         return "suss";
     }
 }
