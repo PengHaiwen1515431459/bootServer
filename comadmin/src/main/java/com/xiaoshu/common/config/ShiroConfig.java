@@ -58,6 +58,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/getCaptcha","anon");
         filterChainDefinitionMap.put("/anonCtrl/","anon");
         filterChainDefinitionMap.put("/sysRole/test","anon");
+        filterChainDefinitionMap.put("/api/login","anon");
         filterChainDefinitionMap.put("/systemLogout","authc");
         filterChainDefinitionMap.put("/**","authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
