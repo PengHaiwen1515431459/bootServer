@@ -52,7 +52,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/swagger-resources/configuration/ui", "anon");
         filterChainDefinitionMap.put("/v2/api-docs", "anon");
         filterChainDefinitionMap.put("/webjars/springfox-swagger-ui/**", "anon");
-
+        filterChainDefinitionMap.put("/api/**", "anon");
         filterChainDefinitionMap.put("/admin/login","anon");
         filterChainDefinitionMap.put("/toLogin","anon");
         filterChainDefinitionMap.put("/getCaptcha","anon");

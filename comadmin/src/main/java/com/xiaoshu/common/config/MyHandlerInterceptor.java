@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 public class MyHandlerInterceptor implements HandlerInterceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyHandlerInterceptor.class);
-
+    @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) {
-//        LOGGER.info("当前请求路径.."+httpServletRequest.getRequestURI());
+        LOGGER.info("当前请求路径.."+httpServletRequest.getRequestURI());
         return true;
     }
 

@@ -40,14 +40,16 @@ public class LoginController extends BaseController{
         return R.ok(1,"登录成功",user);
     }
 
-
-    @RequestMapping(value = "/getUser", method = RequestMethod.POST)
+    @ApiOperation(value = "获取app用户登录信息", notes = "获取APP用户信息")
+    @RequestMapping(value = "/server/getUser", method = RequestMethod.POST)
     public R login( HttpSession session) {
         logger.info("app用户登录");
-
         User user=(User) session.getAttribute("user");
         System.out.println(user.getLoginName());
         return R.ok(1,"获取成功");
     }
+
+
+
 
 }
