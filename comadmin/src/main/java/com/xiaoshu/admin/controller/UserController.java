@@ -85,7 +85,7 @@ public class UserController {
     @PostMapping("add")
     @ResponseBody
     @SysLog("保存新增系统用户数据")
-    public ResponseEntity add(@RequestBody  User user){
+    public ResponseEntity add(@RequestBody User user){
         if(StringUtils.isBlank(user.getLoginName())){
             return ResponseEntity.failure("登录名不能为空");
         }
@@ -111,7 +111,7 @@ public class UserController {
             return ResponseEntity.failure("保存用户信息出错");
         }
         //保存用户角色关系
-        userService.saveUserRoles(user.getId(),user.getRoleLists());
+        userService.saveUserRoles(user.getId(), user.getRoleLists());
         return ResponseEntity.success("操作成功");
     }
 
@@ -123,7 +123,7 @@ public class UserController {
             roleIds = user.getRoleLists().stream().map(role -> role.getId().toString()).collect(Collectors.joining(","));
         }
         List<Role> roleList = roleService.selectAll();
-        modelMap.put("localuser",user);
+        modelMap.put("localuser", user);
         modelMap.put("roleIds",roleIds);
         modelMap.put("roleList",roleList);
         return "admin/user/edit";
@@ -133,7 +133,7 @@ public class UserController {
     @PostMapping("edit")
     @ResponseBody
     @SysLog("保存系统用户编辑数据")
-    public ResponseEntity edit(@RequestBody  User user){
+    public ResponseEntity edit(@RequestBody User user){
         if(user.getId()==null){
             return ResponseEntity.failure("用户ID不能为空");
         }
@@ -171,7 +171,7 @@ public class UserController {
         if(user.getId()==null){
             return ResponseEntity.failure("保存用户信息出错");
         }
-        userService.saveUserRoles(user.getId(),user.getRoleLists());
+        userService.saveUserRoles(user.getId(), user.getRoleLists());
         return ResponseEntity.success("操作成功");
     }
 
@@ -231,8 +231,8 @@ public class UserController {
     public String toEditMyInfo(ModelMap modelMap){
         Integer userId = MySysUser.id();
         User user = userService.findUserById(userId);
-        modelMap.put("userinfo",user);
-        modelMap.put("userRole",user.getRoleLists());
+        modelMap.put("userinfo", user);
+        modelMap.put("userRole", user.getRoleLists());
         return "admin/user/userInfo";
     }
 
@@ -267,7 +267,7 @@ public class UserController {
 
     @GetMapping("changePassword")
     public String changePassword(ModelMap modelMap){
-        modelMap.put("currentUser",userService.getById(MySysUser.id()));
+        modelMap.put("currentUser", userService.getById(MySysUser.id()));
         return "admin/user/changePassword";
     }
 

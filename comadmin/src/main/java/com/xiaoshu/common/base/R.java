@@ -1,5 +1,7 @@
 package com.xiaoshu.common.base;
 
+import com.xiaoshu.api.utils.WebConstants;
+
 import java.io.Serializable;
 
 public class R implements Serializable {
@@ -9,8 +11,8 @@ public class R implements Serializable {
 
     public static R ok(){
         R r=new R();
-        r.setCode(1);
-        r.setMsg("操作成功");
+        r.setCode(WebConstants.WEB_CODE_SUCCESS);
+        r.setMsg(WebConstants.WEB_CODE_SUCCESS_MSG);
         return r;
     }
     public static R ok(Integer code){
@@ -33,8 +35,8 @@ public class R implements Serializable {
     }
     public static R  error(){
         R r=new R();
-        r.setCode(0);
-        r.setMsg("操作失败");
+        r.setCode(WebConstants.WEB_CODE_ERROR);
+        r.setMsg(WebConstants.WEB_LOGIN_ERR_MSG);
         return r;
     }
 

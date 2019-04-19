@@ -85,7 +85,7 @@ public class AuthRealm extends AuthorizingRealm {
         }
         byte[] salt = Encodes.decodeHex(user.getSalt());
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                new ShiroUser(user.getId(),user.getLoginName(),user.getNickName(), user.getIcon()),
+                new ShiroUser(user.getId(), user.getLoginName(), user.getNickName(), user.getIcon()),
                 user.getPassword(), //密码
                 ByteSource.Util.bytes(salt),
                 getName()  //realm name
