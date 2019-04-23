@@ -2,6 +2,7 @@ package com.xiaoshu.api.controller;
 
 import com.xiaoshu.admin.entity.User;
 import com.xiaoshu.admin.service.UserService;
+import com.xiaoshu.api.utils.JwtUtil;
 import com.xiaoshu.api.utils.WebConstants;
 import com.xiaoshu.common.base.R;
 import io.swagger.annotations.Api;
@@ -12,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -36,16 +39,18 @@ public class LoginController extends BaseController{
         logger.info("app用户登录");
         User user = userService.findUserByLoginName(username);
         if (user !=null){
+            String token= JwtUtil.sign(username,user.getId().longValue());
+
             putSessionData(session,"user", user);
+            return R.ok(WebConstants.WEB_LOGIN_SUCCESS,WebConstants.WEB_LOGIN_SUCCESS_MSG, token);
         }
-        return R.ok(WebConstants.WEB_LOGIN_SUCCESS,WebConstants.WEB_LOGIN_SUCCESS_MSG, user);
+        return R.ok(WebConstants.WEB_LOGIN_ERR,WebConstants.WEB_LOGIN_ERR_MSG);
     }
 
     @ApiOperation(value = "获取app用户登录信息", notes = "获取APP用户信息")
     @RequestMapping(value = "/server/getUser", method = RequestMethod.POST)
-    public R login( HttpSession session) {
-        User user =(User) session.getAttribute("user");
-        System.out.println(user.getLoginName());
+    public R getLoginName(HttpServletRequest request) {
+        System.out.println(JwtUtil.getUserId(request.getHeader("token")));
         return R.ok(WebConstants.WEB_CODE_SUCCESS,WebConstants.WEB_CODE_SUCCESS_MSG);
     }
 

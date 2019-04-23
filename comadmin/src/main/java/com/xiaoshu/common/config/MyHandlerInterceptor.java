@@ -1,6 +1,7 @@
 package com.xiaoshu.common.config;
 
 
+import com.xiaoshu.api.utils.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

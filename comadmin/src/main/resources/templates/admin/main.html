@@ -21,5 +21,18 @@
 
 <script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/static/admin/js/main.js}"></script>
+<script>
+    $.ajaxSetup({
+        type: 'POST',
+        complete: function(xhr,status) {
+
+            var sessionStatus = xhr.getResponseHeader('session-status');
+            if(sessionStatus == 'timeout') {
+                var top = getTopWinow();
+                top.location.href = '/login';
+            }
+        }
+    });
+</script>
 </body>
 </html>

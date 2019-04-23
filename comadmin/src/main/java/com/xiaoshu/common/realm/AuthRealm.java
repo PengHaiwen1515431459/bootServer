@@ -69,10 +69,12 @@ public class AuthRealm extends AuthorizingRealm {
         String username = (String)token.getPrincipal();
         User user = userService.findUserByLoginName(username);
         if(user == null) {
-            throw new UnknownAccountException();//没找到帐号
+            //没找到帐号
+            throw new UnknownAccountException();
         }
         if(Boolean.TRUE.equals(user.getLocked())) {
-            throw new LockedAccountException(); //帐号锁定
+            //帐号锁定
+            throw new LockedAccountException();
         }
         ServletRequest request = ((WebSubject)SecurityUtils.getSubject()).getServletRequest();
         HttpSession httpSession = ((HttpServletRequest)request).getSession();
@@ -80,15 +82,16 @@ public class AuthRealm extends AuthorizingRealm {
         LonginController.LoginTypeEnum loginType = attribute == null ? null : (LonginController.LoginTypeEnum)attribute;
         if(LonginController.LoginTypeEnum.ADMIN.equals(loginType)) {
             if(Boolean.FALSE.equals(user.getAdminUser())) {
-                throw new UserTypeAccountException(); //帐号不是后台账户
+                //帐号不是后台账户
+                throw new UserTypeAccountException();
             }
         }
         byte[] salt = Encodes.decodeHex(user.getSalt());
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 new ShiroUser(user.getId(), user.getLoginName(), user.getNickName(), user.getIcon()),
-                user.getPassword(), //密码
+                user.getPassword(),
                 ByteSource.Util.bytes(salt),
-                getName()  //realm name
+                getName()
         );
         return authenticationInfo;
     }
